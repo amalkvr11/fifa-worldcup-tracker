@@ -1,0 +1,12 @@
+{
+  "name": "fifa-worldcup-2026",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "deploy": "vercel --prod",
+    "deploy:backend": "cd deploy/vercel-backend && vercel --prod",
+    "install:all": "cd frontend && npm install"
+  }
+}

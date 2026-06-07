@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FIFA World Cup 2026 - Live Match Tracker</title>
+    <meta name="description" content="FIFA World Cup 2026 Live Match Tracker - 48 teams, 12 groups, real-time scores, AI predictions and match analytics." />
+    <meta name="keywords" content="FIFA, World Cup, 2026, match tracker, live scores, AI predictions, football, soccer" />
+    <meta name="author" content="FIFA World Cup 2026 Team" />
+    <meta property="og:title" content="FIFA World Cup 2026 - Live Match Tracker" />
+    <meta property="og:description" content="Track every moment live with AI predictions, real-time updates, and advanced FIFA-themed analytics." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      #preloader {
+        position: fixed;
+        inset: 0;
+        background: #070b14;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      #preloader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .loader-trophy {
+        font-size: 80px;
+        animation: loaderFloat 1.5s ease-in-out infinite;
+      }
+      .loader-bar {
+        margin-top: 20px;
+        width: 200px;
+        height: 3px;
+        background: rgba(250, 204, 21, 0.1);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .loader-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #facc15, #22c55e);
+        border-radius: 3px;
+        animation: loaderFill 1.5s ease-in-out infinite;
+      }
+      @keyframes loaderFloat {
+        0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 20px rgba(250,204,21,0.3)); }
+        50% { transform: translateY(-10px) scale(1.05); filter: drop-shadow(0 0 40px rgba(250,204,21,0.6)); }
+      }
+      @keyframes loaderFill {
+        0% { width: 0%; }
+        50% { width: 70%; }
+        100% { width: 100%; }
+      }
+    </style>
+  </head>
+  <body class="bg-[#0a0e17] text-white antialiased">
+    <div id="preloader">
+      <div class="loader-trophy">🏆</div>
+      <div class="text-sm font-bold text-yellow-400 mt-4 tracking-widest uppercase" style="animation: loaderFloat 2s ease-in-out infinite">Loading FIFA 2026</div>
+      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const el = document.getElementById('preloader')
+          if (el) el.classList.add('hidden')
+        }, 800)
+      })
+    </script>
+  </body>
+</html>
