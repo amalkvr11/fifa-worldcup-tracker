@@ -227,30 +227,21 @@ def chat(body: dict):
 def start_live(mid: int):
     m = next((x for x in ALL_MATCHES if x["id"]==mid), None)
     if not m: return JSONResponse({"error":"Not found"}, status_code=404)
-    if mid in _scores and _scores[mid].get("status")=="live":
-        return JSONResponse({"error":"Already running"}, status_code=400)
-    s1 = STR.get(m["team1_code"],50)
-    s2 = STR.get(m["team2_code"],50)
-    _scores[mid] = {"score_team1":0,"score_team2":0,"status":"live"}
-    _events[mid] = []
+    _scores[mid] = {"score_team1":0,"score_team2":0,"status":"live"}; _events[mid]=[]
+    s1 = STR.get(m["team1_code"],50); s2 = STR.get(m["team2_code"],50)
     G = ["Goal!","What a strike!","Finds the net!","Powerful shot!","Clinical finish!"]
     def sim():
         minute = 0
         while minute < 90:
-            time.sleep(random.uniform(1.5,4.0))
-            minute += random.randint(1,3)
+            time.sleep(random.uniform(1.5,4.0)); minute += random.randint(1,3)
             if minute > 90: minute = 90
             total = s1+s2; ev = random.random()
             if ev < 0.10*(s1/total*2):
-                _scores[mid]["score_team1"]+=1
-                _events[mid].append({"minute":minute,"text":random.choice(G),"type":"goal"})
+                _scores[mid]["score_team1"]+=1; _events[mid].append({"minute":minute,"text":random.choice(G),"type":"goal"})
             elif ev < 0.10*(s1/total*2)+0.10*(s2/total*2):
-                _scores[mid]["score_team2"]+=1
-                _events[mid].append({"minute":minute,"text":random.choice(G),"type":"goal"})
-            elif ev < 0.16:
-                _events[mid].append({"minute":minute,"text":"Yellow card","type":"card"})
-        _scores[mid]["status"]="finished"
-        _events[mid].append({"minute":90,"text":"Full time!","type":"info"})
+                _scores[mid]["score_team2"]+=1; _events[mid].append({"minute":minute,"text":random.choice(G),"type":"goal"})
+            elif ev < 0.16: _events[mid].append({"minute":minute,"text":"Yellow card","type":"card"})
+        _scores[mid]["status"]="finished"; _events[mid].append({"minute":90,"text":"Full time!","type":"info"})
     threading.Thread(target=sim, daemon=True).start()
     return {"status":"started","match_id":mid}
 
